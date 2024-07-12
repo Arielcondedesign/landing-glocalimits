@@ -20,7 +20,7 @@
   }
 
   :root {
-    --green: #b9ff66;
+    --primary-color: #2aa4d4;
     --black: rgb(0, 0, 0);
     --dark: #191a23;
     --white: #f3f3f3;
@@ -34,7 +34,7 @@
     }
 
     body {
-      font-size: 20px;
+      font-size: 16px;
     }
 
     p {
