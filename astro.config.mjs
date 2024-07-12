@@ -4,6 +4,21 @@ import tailwind from "@astrojs/tailwind";
 import storyblok from "@storyblok/astro";
 import basicSsl from '@vitejs/plugin-basic-ssl'
 
+const { MODE, STORYBLOK_ACCESS_TOKEN } = import.meta.env
+
+let server = {}
+
+if (MODE === 'development') {
+  server = {
+    vite: {
+      plugins: [basicSsl()],
+      server: {
+        https: true,
+      },
+    },
+  }
+}
+
 
 // https://astro.build/config
 export default defineConfig({
@@ -12,7 +27,7 @@ export default defineConfig({
   integrations: [
     tailwind({ configFile: "./tailwind.config.mjs" }),
     storyblok({
-      accessToken: "QECZX4W5lTkJfEyhKLXxJwtt",
+      accessToken: STORYBLOK_ACCESS_TOKEN,
       bridge: {
         customParent: 'https://app.storyblok.com',
       },
@@ -25,10 +40,5 @@ export default defineConfig({
     }),
   ],
 
-  vite: {
-    plugins: [basicSsl()],
-    server: {
-      https: true,
-    },
-  },
+  ...server,
 });
